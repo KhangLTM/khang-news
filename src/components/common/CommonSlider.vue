@@ -16,16 +16,15 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
-import { Carousel, Navigation, Slide } from 'vue3-carousel'
+import { Carousel, Navigation, Slide } from 'vue3-carousel';
 
-import 'vue3-carousel/dist/carousel.css'
+import 'vue3-carousel/dist/carousel.css';
 
 defineProps<{
-  itemsToShow: number
-  wrapAround?: boolean
-  slides: any
-}>()
+  itemsToShow: number;
+  wrapAround?: boolean;
+  slides: any;
+}>();
 </script>
 <style lang="scss">
 .news-image-slider {

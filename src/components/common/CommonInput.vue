@@ -9,7 +9,6 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { defineProps, defineEmits, withDefaults } from "vue";
 
 interface InputProps {
   placeholder?: string;

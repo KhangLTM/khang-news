@@ -17,7 +17,7 @@
             'border px-3 py-2 leading-tight',
             page === currentPage
               ? 'border-red-600 bg-red-600 text-white'
-              : 'border-gray-300 bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-700',
+              : 'border-gray-300 bg-white text-gray-500 hover:bg-gray-100 hover:text-gray-700'
           ]"
         >
           {{ page }}
@@ -37,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, withDefaults, computed } from "vue";
+import { computed } from 'vue';
 
 const props = withDefaults(
   defineProps<{
@@ -46,11 +46,11 @@ const props = withDefaults(
   }>(),
   {
     currentPage: 1,
-    totalPages: 1,
-  },
+    totalPages: 1
+  }
 );
 
-const emit = defineEmits(["update:currentPage"]);
+const emit = defineEmits(['update:currentPage']);
 
 const pages = computed(() => {
   let pagesArray = [];
@@ -62,17 +62,17 @@ const pages = computed(() => {
 
 const prevPage = () => {
   if (props.currentPage > 1) {
-    emit("update:currentPage", props.currentPage - 1);
+    emit('update:currentPage', props.currentPage - 1);
   }
 };
 
 const nextPage = () => {
   if (props.currentPage < props.totalPages) {
-    emit("update:currentPage", props.currentPage + 1);
+    emit('update:currentPage', props.currentPage + 1);
   }
 };
 
 const goToPage = (page: number) => {
-  emit("update:currentPage", page);
+  emit('update:currentPage', page);
 };
 </script>

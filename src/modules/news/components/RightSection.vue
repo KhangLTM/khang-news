@@ -9,21 +9,16 @@
         <div class="flex h-[50px] bg-white px-4 py-2">
           <p class="text-xl font-bold">Newsletter</p>
         </div>
-        <div
-          class="flex flex-1 flex-col items-center justify-center gap-4 bg-white"
-        >
+        <div class="flex flex-1 flex-col items-center justify-center gap-4 bg-white px-2 md:px-0">
           <p class="text-primary text-center text-base">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harums
-            Harums Harums Harums
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harums Harums Harums Harums
           </p>
           <div>
             <div class="flex">
               <CommonInput inputClasses="h-[40px]" placeholder="YOUR EMAIL" />
               <CommonButton fill>Sign Up</CommonButton>
             </div>
-            <p class="text-primary mt-1 text-center">
-              Lorem ipsum dolor sit amet
-            </p>
+            <p class="text-primary mt-1 text-center">Lorem ipsum dolor sit amet</p>
           </div>
         </div>
       </div>
@@ -48,26 +43,23 @@
         <p class="text-xl font-bold">Tags</p>
       </div>
       <div class="flex max-w-[420px] flex-wrap gap-2">
-        <CommonButton
-          v-for="tag in newTags"
-          :key="tag.id"
-          buttonClass="h-[40px]"
-          >{{ tag.name }}</CommonButton
-        >
+        <CommonButton v-for="tag in newTags" :key="tag.id" buttonClass="h-[40px]">{{
+          tag.name
+        }}</CommonButton>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { newTags } from "@/mocks";
-import { NewsCard, TypeShow } from "@/modules/news/enum";
+import { newTags } from '@/mocks';
+import { NewsCard, TypeShow } from '@/modules/news/enum';
 
-import CommonInput from "@/components/common/CommonInput.vue";
-import CommonButton from "@/components/common/CommonButton.vue";
+import CommonInput from '@/components/common/CommonInput.vue';
+import CommonButton from '@/components/common/CommonButton.vue';
 
-import SocialBlocks from "../components/SocialBlocks.vue";
-import CardNews from "../components/CardNews.vue";
+import SocialBlocks from '../components/SocialBlocks.vue';
+import CardNews from '../components/CardNews.vue';
 </script>
 
 <style scoped></style>

@@ -1,9 +1,5 @@
 <template>
-  <span
-    :class="computedClasses"
-    :style="computedStyles"
-    @click="handleClick"
-  >
+  <span :class="computedClasses" :style="computedStyles" @click="handleClick">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       :width="size"
@@ -17,25 +13,23 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, defineEmits, computed } from "vue";
-import listIcons from "./icons"; // Assuming `listIcons` contains SVG data for various icons
+import { computed } from 'vue';
+import listIcons from './icons';
 
-// Define props interface
 interface IconProps {
   icon: string;
   size: string;
-  fill: string;
+  fill?: string;
   fillHover?: string;
-  class?: string | object; // Allow both string and object types
-  svgProps?: Record<string, unknown>; // Ensure svgProps is compatible with any props
+  class?: string | object;
+  svgProps?: Record<string, unknown>;
   customViewBox?: string;
-  containerStyles?: Record<string, string>; // Only accepts an object
+  containerStyles?: Record<string, string>;
 }
 
-// Define props using defineProps
 const props = defineProps<IconProps>();
 
-const emit = defineEmits(["click"]);
+const emit = defineEmits(['click']);
 
 const computedClasses = computed(() => {
   return [props.class];
@@ -45,22 +39,18 @@ const computedStyles = computed(() => {
   const styles: Record<string, string> = {
     width: `${props.size}px`,
     height: `${props.size}px`,
-    ...props.containerStyles, // Merge containerStyles into styles
+    ...props.containerStyles
   };
 
   return styles;
 });
 
-const iconComp = computed(
-  () => (listIcons as Record<string, string>)[props.icon],
-);
+const iconComp = computed(() => (listIcons as Record<string, string>)[props.icon]);
 
-const viewBox = computed(
-  () => props.customViewBox || `0 0 ${props.size} ${props.size}`,
-);
+const viewBox = computed(() => props.customViewBox || `0 0 ${props.size} ${props.size}`);
 
 const handleClick = () => {
-  emit("click");
+  emit('click');
 };
 </script>
 
