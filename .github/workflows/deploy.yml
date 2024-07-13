@@ -10,6 +10,7 @@ jobs:
   deploy_dev:
     name: Deploy Dev Environment
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/dev'
     
     steps:
       - name: Checkout code
@@ -20,30 +21,48 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          docker build -t dev_app -f docker/dev/Dockerfile .
-          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-          docker tag dev_app $DOCKER_USERNAME/dev_app:latest
+          docker build -t $DOCKER_USERNAME/dev_app:latest -f docker/dev/Dockerfile .
+          docker login -u $DOCKER_USERNAME --password-stdin
           docker push $DOCKER_USERNAME/dev_app:latest
 
-      - name: SSH into VPS and pull dev_app image
+      - name: SSH into Dev VPS and deploy dev_app
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            echo "Pulling Docker image: ${{ secrets.DOCKER_USERNAME }}/dev_app:latest"
-            docker pull ${{ secrets.DOCKER_USERNAME }}/dev_app:latest
+            docker pull $DOCKER_USERNAME/dev_app:latest
+            docker stop dev_app || true
+            docker rm dev_app || true
+            docker run -d --restart=unless-stopped --name dev_app -p 3000:80 $DOCKER_USERNAME/dev_app:latest
 
-      - name: Start dev_app container on VPS
+  deploy_prod:
+    name: Deploy Prod Environment
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Build and push Docker image for prod
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker build -t $DOCKER_USERNAME/prod_app:latest -f docker/prod/Dockerfile .
+          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          docker push $DOCKER_USERNAME/prod_app:latest
+
+      - name: SSH into Prod VPS and deploy prod_app
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            if [ $(docker ps -q -f name=dev_app) ]; then
-              docker stop dev_app
-              docker rm dev_app
-            fi
-            docker run -d --name dev_app -p 3000:80 ${{ secrets.DOCKER_USERNAME }}/dev_app:latest
+            docker pull $DOCKER_USERNAME/prod_app:latest
+            docker stop prod_app || true
+            docker rm prod_app || true
+            docker run -d --restart=unless-stopped --name prod_app -p 3002:80 $DOCKER_USERNAME/prod_app:latest
