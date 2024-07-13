@@ -42,7 +42,6 @@ const styleButton = computed(() => ({
 const computedButtonClass = computed(() => {
   const baseClasses = `${props.buttonClass} p-2 rounded`;
 
-  // Object to define conditional classes
   const classObject = {
     [`text-white bg-${props.color}`]: props.fill,
     "border-2 border-red-600 text-red-600": props.outline,
