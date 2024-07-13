@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-gray-200;
+  }
+  .text-primary {
+    @apply text-[13px] text-gray-500;
+  }
+}
