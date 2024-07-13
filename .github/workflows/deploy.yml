@@ -52,7 +52,7 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
           docker build -t $DOCKER_USERNAME/prod_app:latest -f docker/prod/Dockerfile .
-          docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
           docker push $DOCKER_USERNAME/prod_app:latest
 
       - name: SSH into Prod VPS and deploy prod_app
@@ -62,7 +62,7 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            docker pull $DOCKER_USERNAME/prod_app:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/prod_app:latest
             docker stop prod_app || true
             docker rm prod_app || true
-            docker run -d --restart=unless-stopped --name prod_app -p 3002:80 $DOCKER_USERNAME/prod_app:latest
+            docker run -d --restart=unless-stopped --name prod_app -p 3002:80 ${{ secrets.DOCKER_USERNAME }}/prod_app:latest
