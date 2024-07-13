@@ -39,7 +39,6 @@
 <script setup lang="ts">
 import { defineProps, defineEmits, withDefaults, computed } from "vue";
 
-// Define props with default values
 const props = withDefaults(
   defineProps<{
     currentPage: number;
