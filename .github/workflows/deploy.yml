@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - dev
-      
+
 jobs:
   deploy_dev:
     name: Deploy Dev Environment
@@ -12,6 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Echo secrets (temporary for testing)
+        run: |
+          echo "VPS_HOST: ${{ secrets.VPS_HOST }}"
+          echo "USERNAME: ${{ secrets.USERNAME }}"
+          echo "PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}"
+
       - name: SSH into VPS and pull dev_app image
         uses: appleboy/ssh-action@master
         with:
