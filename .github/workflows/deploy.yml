@@ -8,9 +8,7 @@ on:
 jobs:
   deploy_dev:
     name: Deploy Dev Environment
-    if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
-    
     
     steps:
       - name: Checkout code
@@ -33,23 +31,11 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            echo "hello"
-      
-      - name: SSH into VPS and pull dev_app image
-        uses: appleboy/ssh-action@master
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.PRIVATE_KEY }}
-          script: |
-            docker pull $DOCKER_USERNAME/dev_app:latest
+            echo "Pulling Docker image: ${{ secrets.DOCKER_USERNAME }}/dev_app:latest"
+            docker pull ${{ secrets.DOCKER_USERNAME }}/dev_app:latest
 
       - name: Start dev_app container on VPS
         uses: appleboy/ssh-action@master
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         with:
           host: ${{ secrets.VPS_HOST }}
           username: ${{ secrets.USERNAME }}
@@ -57,4 +43,4 @@ jobs:
           script: |
             docker stop dev_app || true  # Stop container if running
             docker rm dev_app || true    # Remove container if exists
-            docker run -d --name dev_app -p 3000:80 $DOCKER_USERNAME/dev_app:latest
+            docker run -d --name dev_app -p 3000:80 ${{ secrets.DOCKER_USERNAME }}
