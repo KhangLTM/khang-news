@@ -32,10 +32,10 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            docker pull $DOCKER_USERNAME/dev_app:latest
+            docker pull ${{ secrets.DOCKER_USERNAME }}/dev_app:latest
             docker stop dev_app || true
             docker rm dev_app || true
-            docker run -d --restart=unless-stopped --name dev_app -p 3000:80 $DOCKER_USERNAME/dev_app:latest
+            docker run -d --restart=unless-stopped --name dev_app -p 3000:80 ${{ secrets.DOCKER_USERNAME }}/dev_app:latest
 
   deploy_prod:
     name: Deploy Prod Environment
