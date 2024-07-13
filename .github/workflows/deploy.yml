@@ -11,10 +11,20 @@ jobs:
     if: github.ref == 'refs/heads/dev'
     runs-on: ubuntu-latest
     
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Build and push Docker image for dev
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        run: |
+          docker build -t dev_app -f docker/dev/Dockerfile .
+          echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+          docker tag dev_app $DOCKER_USERNAME/dev_app:latest
+          docker push $DOCKER_USERNAME/dev_app:latest
 
       - name: SSH into VPS and pull dev_app image
         uses: appleboy/ssh-action@master
