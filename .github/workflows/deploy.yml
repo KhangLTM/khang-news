@@ -21,8 +21,9 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         run: |
-          docker build -t $DOCKER_USERNAME/dev_app:latest -f docker/dev/Dockerfile .
+          docker build -t dev_app -f docker/dev/Dockerfile .
           docker login -u $DOCKER_USERNAME --password-stdin
+          docker tag dev_app $DOCKER_USERNAME/dev_app:latest
           docker push $DOCKER_USERNAME/dev_app:latest
 
       - name: SSH into Dev VPS and deploy dev_app
