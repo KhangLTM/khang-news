@@ -19,8 +19,8 @@ jobs:
       - name: SSH into VPS and pull dev_app image
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.USERNAME }}
+          host: 36.50.176.158
+          username: root
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
             echo "hello"
