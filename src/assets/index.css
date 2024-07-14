@@ -5,8 +5,19 @@
 @layer base {
   body {
     @apply bg-gray-200;
+    li {
+      text-align: left;
+    }
   }
   .text-primary {
     @apply text-[13px] text-gray-500;
+  }
+}
+@layer components {
+  .slider-btn {
+    @apply size-[20px] md:size-[30px] border md:border-2 border-white p-1 md:p-2 cursor-pointer;
+  }
+  .slider-btn-gray {
+    @apply size-[20px] md:size-[30px] border md:border-2 border-gray-300 p-1 md:p-2 cursor-pointer;
   }
 }

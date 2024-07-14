@@ -1,70 +1,51 @@
 <template>
-  <nav class="p-4 border b">
-    <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-      <div class="relative flex items-center justify-between h-16">
-        <div class="absolute inset-y-0 right-0 flex items-center sm:hidden">
-          <button
-            @click="mobileMenuOpen = !mobileMenuOpen"
-            class="text-gray-300 hover:text-white focus:outline-none focus:text-white"
-          >
-            <span class="sr-only">Open main menu</span>
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
+  <nav :class="navClass">
+    <SvgIcon @click="mobileMenuOpen = !mobileMenuOpen" icon="burgerMenu" size="24" />
 
-    <!-- Mobile menu, show/hide based on mobile menu state -->
-    <div v-if="mobileMenuOpen" class="sm:hidden" @click.away="mobileMenuOpen = false">
-      <div class="px-2 pt-2 pb-3 space-y-1">
-        <!-- Mobile menu items -->
-        <a
-          href="#"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >Home</a
-        >
-        <a
-          href="#"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >About</a
-        >
-        <a
-          href="#"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >Services</a
-        >
-        <a
-          href="#"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-          >Contact</a
-        >
+    <div v-if="mobileMenuOpen" :class="menuClass">
+      <div
+        v-for="item in menuItems"
+        :key="item.label"
+        :class="`pt-2 pb-3 space-y-1 ${getActiveClass(item.value)}`"
+      >
+        <p @click="handleClickMenuItem(item.value)" class="px-3 py-2 rounded-md text-base">
+          {{ item.label }}
+        </p>
       </div>
     </div>
   </nav>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script setup lang="ts">
+import { ref, defineProps } from 'vue';
+import SvgIcon from '@/components/icon/SvgIcon.vue';
 
-export default defineComponent({
-  name: 'MobileMenu',
-  setup() {
-    const mobileMenuOpen = ref(false);
+interface MenuItem {
+  label: string;
+  value: string;
+}
 
-    return {
-      mobileMenuOpen
-    };
-  }
-});
+const emit = defineEmits(['changeMenu']);
+
+const props = defineProps<{
+  menuItems: MenuItem[];
+  activeMenu: string;
+  navClass?: string;
+  buttonClass?: string;
+  menuClass?: string;
+}>();
+
+const mobileMenuOpen = ref(false);
+
+const getActiveClass = (menuItem: string) => {
+  if (menuItem === props.activeMenu) return 'bg-red-600 text-white';
+};
+const handleClickMenuItem = (menuItem: string) => {
+  emit('changeMenu', menuItem);
+  mobileMenuOpen.value = false;
+};
 </script>
 
 <style scoped>
-/* Tailwind CSS classes for styling */
+/* Add any additional scoped styles if needed */
 </style>
