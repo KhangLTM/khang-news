@@ -90,7 +90,7 @@ import { comments } from '@/mocks';
 
 const breadcrumbs = [
   { label: 'Home', path: '/' },
-  { label: 'Categories', path: '/category' },
+  { label: 'Categories', path: '/' },
   { label: 'Technology', path: '/category/1' },
   { label: 'Lorem ipsum dolor sit', path: '/single-news/1' }
 ];

@@ -1,5 +1,51 @@
-# Vue 3 + TypeScript + Vite
+# Newsroom Project
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This repository contains the source code for the Newsroom project, built with modern web development technologies and best practices.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Technologies Used
+
+- **Vue 3**: A progressive framework for building user interfaces.
+- **TypeScript**: Strongly typed programming language that builds on JavaScript.
+- **Tailwind CSS**: Utility-first CSS framework for quickly building custom designs.
+- **Docker**: Containerization platform to simplify deployment.
+- **GitHub Actions**: CI/CD pipeline for automated testing and deployment.
+- **Vue TanStack Query**: Data-fetching library for managing server-state in Vue.
+- **ESLint**: Code quality tool to maintain consistent code style.
+- **Prettier**: Code formatter to ensure consistent code style.
+
+## Features
+
+- **Two Environments**:
+  - Development: [http://dev.newsroom.work.gd](http://dev.newsroom.work.gd/)
+  - Production: [http://newsroom.work.gd](http://newsroom.work.gd/)
+- **Automated Deployment**: Automatically deploys changes to the appropriate environment when changes are merged into the dev/master branch.
+
+## Getting Started
+
+1. **Clone the Repository**:
+
+   ```sh
+   git clone https://github.com/KhangLTM/khang-news.git
+   cd newsroom
+   ```
+
+2. **Install Dependencies**:
+
+   ```sh
+   npm install
+   ```
+
+3. **Run the Development Server**:
+   ```sh
+   npm run dev
+   ```
+
+## Contributing
+
+We welcome contributions! Please see our [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+
+Require Node.js 18.0 or above

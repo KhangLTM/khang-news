@@ -15,5 +15,10 @@ const router = createRouter({
 });
 
 router.beforeEach(requiresAuth);
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title ? to.meta.title : 'NewsRoom';
+
+  next();
+});
 
 export default router;

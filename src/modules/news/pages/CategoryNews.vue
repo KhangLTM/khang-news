@@ -4,7 +4,7 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
       <div class="md:col-span-2 flex flex-col gap-5">
         <div class="flex h-[50px] items-center justify-between bg-white px-4 py-2">
-          <p class="text-xl font-bold">Entertainment</p>
+          <p class="text-xl font-bold">Technology</p>
           <p class="text-primary">View all</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -67,7 +67,7 @@ import CommonPagination from '@/components/common/CommonPagination.vue';
 
 const breadcrumbs = [
   { label: 'Home', path: '/' },
-  { label: 'Categories', path: '/category' },
+  { label: 'Categories', path: '/' },
   { label: 'Technology', path: '/category/1' }
 ];
 
