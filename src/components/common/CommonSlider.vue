@@ -1,37 +1,67 @@
 <template>
-  <Carousel :itemsToShow="itemsToShow" :wrapAround="wrapAround">
+  <Carousel ref="carousel" :itemsToShow="itemsToShow" :wrapAround="wrapAround">
     <template v-for="slide in slides" :key="slide.id">
       <Slide :slide="slide">
-        <slot name="slideItem"> </slot>
+        <slot name="slideItem" :slide="slide"> </slot>
       </Slide>
     </template>
 
     <template #addons>
-      <!-- Slot for addons (e.g., Navigation component) -->
-      <slot name="addons">
-        <Navigation />
+      <slot v-if="showNavigation" name="addons">
+        <Navigation>
+          <template #next>
+            <div class="slider-btn">
+              <SvgIcon icon="arrowRightWhite" :size="isMobile ? 9 : 11" />
+            </div>
+          </template>
+          <template #prev>
+            <div class="slider-btn rotate-[180deg]">
+              <SvgIcon icon="arrowRightWhite" :size="isMobile ? 9 : 11" />
+            </div>
+          </template>
+        </Navigation>
       </slot>
     </template>
   </Carousel>
 </template>
 
 <script setup lang="ts">
-import { defineProps } from 'vue'
-import { Carousel, Navigation, Slide } from 'vue3-carousel'
+import { ref } from 'vue';
+import { Carousel, Navigation, Slide } from 'vue3-carousel';
+import SvgIcon from '@/components/icon/SvgIcon.vue';
+import { useDevice } from '@/composables/useDevice';
 
-import 'vue3-carousel/dist/carousel.css'
+import 'vue3-carousel/dist/carousel.css';
 
-defineProps<{
-  itemsToShow: number
-  wrapAround?: boolean
-  slides: any
-}>()
+withDefaults(
+  defineProps<{
+    itemsToShow: number;
+    wrapAround?: boolean;
+    showNavigation?: boolean;
+    slides: any;
+  }>(),
+  {
+    wrapAround: false,
+    showNavigation: true
+  }
+);
+const { isMobile } = useDevice();
+const carousel = ref(null);
+
+const next = () => (carousel.value as any).next();
+const prev = () => (carousel.value as any).prev();
+
+defineExpose({
+  next,
+  prev
+});
 </script>
 <style lang="scss">
 .news-image-slider {
   .carousel__viewport {
     height: 100%;
     .carousel__track {
+      @apply md:gap-[20px];
       height: 100%;
     }
   }
