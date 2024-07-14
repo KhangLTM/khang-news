@@ -32,7 +32,7 @@ enum TypeShow {
 
 withDefaults(
   defineProps<{
-    typeShow: TypeShow;
+    typeShow?: TypeShow;
   }>(),
   {
     typeShow: TypeShow.SIMPLE

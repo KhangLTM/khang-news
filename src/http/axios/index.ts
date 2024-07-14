@@ -1,14 +1,13 @@
-import axiosRequest from "axios";
+import axiosRequest from 'axios';
 
-import { VUE_BASE_PATH } from "@/constants";
-
+import { VITE_BASE_API } from '@/constants';
 export const axios = axiosRequest.create({
-  baseURL: VUE_BASE_PATH,
+  baseURL: VITE_BASE_API,
   headers: {
-    Accept: "application/json",
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json",
-  },
+    Accept: 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Content-Type': 'application/json'
+  }
 });
 
 export const axiosInstance = axios;

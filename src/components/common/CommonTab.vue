@@ -12,9 +12,9 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed } from 'vue';
 
-type Direction = "horizontal" | "vertical";
+type Direction = 'horizontal' | 'vertical';
 
 interface Tab {
   value: string | number;
@@ -24,36 +24,34 @@ interface Tab {
 interface TabsProps {
   tabs: Tab[];
   modelValue: string | number;
-  gap: number;
-  direction: Direction;
+  gap?: number;
+  direction?: Direction;
 }
 
 const props = withDefaults(defineProps<TabsProps>(), {
   tabs: () => [],
-  modelValue: "",
+  modelValue: '',
   gap: 0,
-  direction: "horizontal" as Direction,
+  direction: 'horizontal' as Direction
 });
 
-const emit = defineEmits(["update:modelValue", "changeTab"]);
+const emit = defineEmits(['update:modelValue', 'changeTab']);
 
 const containerClass = computed(() => {
-  return props.direction === "horizontal" ? "flex flex-row" : "flex flex-col";
+  return props.direction === 'horizontal' ? 'flex flex-row' : 'flex flex-col';
 });
 
 const tabClass = (tab: Tab) => {
   return [
-    "cursor-pointer px-4 py-2 transition-all duration-300",
-    tab.value === props.modelValue
-      ? "bg-red-600 text-white"
-      : "bg-white text-black",
-    props.direction === "horizontal" ? `mr-${props.gap}` : `mb-${props.gap}`,
+    'cursor-pointer px-4 py-2 transition-all duration-300',
+    tab.value === props.modelValue ? 'bg-red-600 text-white' : 'bg-white text-black',
+    props.direction === 'horizontal' ? `mr-${props.gap}` : `mb-${props.gap}`
   ];
 };
 
 const selectTab = (value: string | number) => {
-  emit("update:modelValue", value);
-  emit("changeTab", value);
+  emit('update:modelValue', value);
+  emit('changeTab', value);
 };
 </script>
 

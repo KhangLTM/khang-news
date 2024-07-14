@@ -6,7 +6,7 @@
   body {
     @apply bg-gray-200;
     li {
-      text-align: left;
+      @apply text-left;
     }
   }
   .text-primary {

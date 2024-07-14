@@ -24,7 +24,7 @@
       </div>
     </div>
     <img
-      class="h-[120px] w-full rounded-sm"
+      class="h-[120px] md:h-[250px] w-full rounded-sm"
       src="https://res.klook.com/image/upload/c_fill,w_750,h_500/q_80/w_80,x_15,y_15,g_south_west,l_Klook_water_br_trans_yhcmh3/activities/tsah7c9evnal289z5fig.jpg"
     />
     <div class="flex h-[50px] bg-white px-4 py-2">
@@ -32,10 +32,11 @@
     </div>
     <div class="grid grid-rows-3 gap-4">
       <CardNews
-        v-for="i in 4"
-        :key="i"
+        v-for="news in hightLightNews"
+        :key="news.id"
+        class="h-[80px]"
         :typeCard="NewsCard.CARD_TITLE"
-        class="h-[80px] bg-white"
+        :newsItem="news"
       ></CardNews>
     </div>
     <div class="space-y-3">
@@ -54,12 +55,15 @@
 <script setup lang="ts">
 import { newTags } from '@/mocks';
 import { NewsCard, TypeShow } from '@/modules/news/enum';
+import { useFetchNews } from '../service';
 
 import CommonInput from '@/components/common/CommonInput.vue';
 import CommonButton from '@/components/common/CommonButton.vue';
 
 import SocialBlocks from '../components/SocialBlocks.vue';
 import CardNews from '../components/CardNews.vue';
+
+const { data: hightLightNews } = useFetchNews();
 </script>
 
 <style scoped></style>

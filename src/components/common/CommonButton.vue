@@ -10,11 +10,11 @@
 import { computed } from 'vue';
 
 interface ButtonProps {
-  label: string;
-  buttonClass: string;
-  fill: boolean;
-  outline: boolean;
-  color: string;
+  label?: string;
+  buttonClass?: string;
+  fill?: boolean;
+  outline?: boolean;
+  color?: string;
 }
 
 const props = withDefaults(defineProps<ButtonProps>(), {
@@ -36,7 +36,7 @@ const styleButton = computed(() => ({
 }));
 
 const computedButtonClass = computed(() => {
-  const baseClasses = `${props.buttonClass} p-2 rounded`;
+  const baseClasses = `${props.buttonClass} p-2 rounded hover:opacity-80`;
 
   const classObject = {
     [`text-white bg-${props.color}`]: props.fill,

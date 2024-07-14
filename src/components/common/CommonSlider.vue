@@ -2,7 +2,7 @@
   <Carousel ref="carousel" :itemsToShow="itemsToShow" :wrapAround="wrapAround">
     <template v-for="slide in slides" :key="slide.id">
       <Slide :slide="slide">
-        <slot name="slideItem"> </slot>
+        <slot name="slideItem" :slide="slide"> </slot>
       </Slide>
     </template>
 
@@ -61,6 +61,7 @@ defineExpose({
   .carousel__viewport {
     height: 100%;
     .carousel__track {
+      @apply md:gap-[20px];
       height: 100%;
     }
   }
