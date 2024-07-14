@@ -1,24 +1,13 @@
-import { useQuery } from "@tanstack/vue-query";
-import { fetchUsersApi, fetchSingleNewsApi } from "./userApi";
+import { useQuery } from '@tanstack/vue-query';
+import { fetchNewsApi } from './api';
 
-export function getFetchNewsQueryKey() {
-  return ["fetchNews"];
+export function getFetchNewsQueryKey(page) {
+  return ['fetchNews', page];
 }
 
-export function getFetchNewsByIdQueryKey(id: string) {
-  if (!id) return ["fetchNewsById"];
-  return ["fetchNewsById", id];
-}
-
-export function useFetchNews() {
+export function useFetchNews(page) {
   return useQuery({
-    queryKey: getFetchNewsQueryKey(),
-    queryFn: ({ signal }) => fetchUsersApi(signal),
-  });
-}
-export function useFetchNewsById() {
-  return useQuery({
-    queryKey: getFetchNewsByIdQueryKey(),
-    queryFn: ({ signal }) => fetchSingleNewsApi(signal),
+    queryKey: getFetchNewsQueryKey(page),
+    queryFn: ({ signal }) => fetchNewsApi(signal, page?.value ?? 1)
   });
 }

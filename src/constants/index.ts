@@ -1,6 +1,7 @@
-export * from "./apiCode";
+export * from './successCode';
+export * from './errorCode';
 
-export * from "./route";
-export * from "./system";
+export * from './route';
+export * from './system';
 
-export const VUE_BASE_PATH = import.meta.env.VUE_BASE_PATH ?? "";
+export const VITE_BASE_API = import.meta.env.VITE_BASE_API ?? '';
