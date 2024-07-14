@@ -26,7 +26,7 @@ This repository contains the source code for the Newsroom project, built with mo
 
    ```sh
    git clone https://github.com/KhangLTM/khang-news.git
-   cd newsroom
+   cd khang-news
    ```
 
 2. **Install Dependencies**:
@@ -39,13 +39,11 @@ This repository contains the source code for the Newsroom project, built with mo
    ```sh
    npm run dev
    ```
-
-## Contributing
-
-We welcome contributions! Please see our [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+   
+# Require Node.js 18.0 or above
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
-Require Node.js 18.0 or above
+
