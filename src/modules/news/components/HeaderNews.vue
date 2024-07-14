@@ -47,7 +47,7 @@
       <p class="font-bold text-3xl"><span class="text-red-600">NEWS</span>ROOM</p>
       <MobileMenu
         v-model:isOpen="isMenuOpen"
-        :activeMenu="curMenuItem"
+        :activeMenu="curMenuItem as string"
         navClass="p-1 border relative"
         menuClass="absolute bg-white top-[41px] w-screen right-[-10px] z-10"
         :menuItems="menuItems"
@@ -58,8 +58,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed } from 'vue';
+import { useRouter, useRoute } from 'vue-router';
 import dayjs from 'dayjs';
 import SvgIcon from '@/components/icon/SvgIcon.vue';
 import CommonTab from '@/components/common/CommonTab.vue';
@@ -68,24 +68,27 @@ import CommonSlider from '@/components/common/CommonSlider.vue';
 import MobileMenu from '../components/MobileMenu.vue';
 import { useDevice } from '@/composables/useDevice';
 
-const { isMobile } = useDevice();
-
-const isMenuOpen = ref(false);
-const slider = ref(null);
 const menuItems = [
-  { label: 'Home', value: 'home' },
-  { label: 'Categories', value: 'categories' },
+  { label: 'Home', value: 'news' },
+  { label: 'Categories', value: 'categoryNews' },
   { label: 'Single News', value: 'singleNews' }
 ];
 
 const router = useRouter();
-const curMenuItem = ref('home');
+const route = useRoute();
+
+const { isMobile } = useDevice();
+
+const isMenuOpen = ref(false);
+const slider = ref(null);
+
 const search = ref('');
 
+const curMenuItem = computed<string>(() => (route.name as string) || 'news');
+
 const handleClickMenu = (menuItem: string) => {
-  curMenuItem.value = menuItem;
   switch (menuItem) {
-    case 'categories':
+    case 'categoryNews':
       router.push({ name: 'categoryNews', params: { id: 1 } });
       break;
     case 'singleNews':

@@ -50,7 +50,7 @@
           <CommonPagination v-model:currentPage="page" :totalPages="2" />
         </div>
       </div>
-      <RightSection class="md:col-span-1 flex flex-col"> </RightSection>
+      <RightSection class="md:col-span-1"> </RightSection>
     </div>
   </div>
 </template>
