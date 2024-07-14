@@ -29,7 +29,7 @@
           </p>
           <h2 class="font-bold text-xl">Inventore vero. Cumque</h2>
           <img
-            class="w-[150px] h-[100px] md:h-[170px] md:w-[320px] rounded-sm float-start pr-[20px]"
+            class="w-[150px] h-[100px] md:h-[170px] md:w-[320px] rounded-sm float-left pr-[20px]"
             src="https://picsum.photos/500/509"
           />
           <p>

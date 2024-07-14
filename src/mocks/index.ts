@@ -171,7 +171,17 @@ export const comments: Comment[] = [
         userAvatar:
           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDJzEaxLN-jGRYYUO65pWu7Q9GXoNt4LUSSA&usqp=CAU',
         date: '02 Jan 2045',
-        text: "Reply to John Doe's comment..."
+        text: "Reply to John Doe's comment...",
+        replies: [
+          {
+            id: 12,
+            userName: 'Jane Doe',
+            userAvatar:
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDJzEaxLN-jGRYYUO65pWu7Q9GXoNt4LUSSA&usqp=CAU',
+            date: '02 Jan 2045',
+            text: "Reply to John Doe's comment..."
+          }
+        ]
       }
     ]
   }
