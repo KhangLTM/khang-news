@@ -35,7 +35,7 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/dev_app:latest
             docker stop dev_app || true
             docker rm dev_app || true
-            docker run -d --restart=unless-stopped --name dev_app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/dev_app:latest
+            docker run -d --restart=unless-stopped --name dev_app -p 3000:80 ${{ secrets.DOCKER_USERNAME }}/dev_app:latest
 
   deploy_prod:
     name: Deploy Prod Environment
@@ -65,4 +65,4 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/prod_app:latest
             docker stop prod_app || true
             docker rm prod_app || true
-            docker run -d --restart=unless-stopped --name prod_app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/prod_app:latest
+            docker run -d --restart=unless-stopped --name prod_app -p 3002:80 ${{ secrets.DOCKER_USERNAME }}/prod_app:latest
