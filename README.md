@@ -1,6 +1,4 @@
-# Newsroom Project
-
-This repository contains the source code for the Newsroom project, built with modern web development technologies and best practices.
+# VUE3 BOITERPLATE
 
 ## Technologies Used
 
